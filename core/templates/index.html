@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>ScanDefeX Camera</title></head>
+<body>
+  <h2>Scan Wall</h2>
+  <video id="video" width="300" autoplay></video><br>
+  <button id="snap">Capture</button>
+  <canvas id="canvas" width="300" height="225" style="display:none;"></canvas>
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="image_data" id="image_data">
+    <button type="submit">Send to AI</button>
+  </form>
+  {% if result %}
+    <h3>AI Response:</h3>
+    <p>{{ result }}</p>
+  {% endif %}
+  <script>
+    const video = document.querySelector("#video");
+    const canvas = document.querySelector("#canvas");
+    const image_data = document.querySelector("#image_data");
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      video.srcObject = stream;
+    });
+
+    document.querySelector("#snap").onclick = () => {
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataURL = canvas.toDataURL("image/png");
+      image_data.value = dataURL;
+    };
+  </script>
+</body>
+</html>

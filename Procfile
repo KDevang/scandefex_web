@@ -1,0 +1,1 @@
+web: gunicorn scandefex_web.wsgi
