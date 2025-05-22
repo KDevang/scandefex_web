@@ -1,11 +1,18 @@
 from pathlib import Path
+import os
 
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-xyz'
-DEBUG = True
-ALLOWED_HOSTS = []
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']  # Allow all for now, or use ['scandefexwa.azurewebsites.net']
+
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -13,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    'core',  # Your main app
 ]
 
 MIDDLEWARE = [
@@ -31,7 +38,7 @@ ROOT_URLCONF = 'scandefex_web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'core' / 'templates'],  # ✅ Points to your templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -46,6 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scandefex_web.wsgi.application'
 
+# SQLite for local and small cloud apps
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -53,11 +61,20 @@ DATABASES = {
     }
 }
 
+# Password validation (skip during dev)
 AUTH_PASSWORD_VALIDATORS = []
 
+# Localization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Static files config
 STATIC_URL = 'static/'
+
+# Required for Azure (collectstatic output path)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
