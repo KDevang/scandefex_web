@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - ScanDefexWA
+name: Build and deploy Python app to Azure Web App - ScanDefeXWA
 
 on:
   push:
@@ -68,14 +68,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C594DC705A0A481392B5387E0879DBCF }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_818FA89521A94A79B7DE39671255C3A8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A4D84AC82F5A41DBA543F0321FD8318D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_991C4807D7374E88A359FA9D719BF1D9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E574ABA2DF1B494598EDA31770DDCA0C }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_AB8E9AB8E13F47269B0F44C2237C7FB3 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'ScanDefexWA'
+          app-name: 'ScanDefeXWA'
           slot-name: 'Production'
           
