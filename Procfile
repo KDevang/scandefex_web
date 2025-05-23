@@ -1,1 +1,1 @@
-web: gunicorn scandefex_web.wsgi
+web: gunicorn scandefex_web.wsgi:application
